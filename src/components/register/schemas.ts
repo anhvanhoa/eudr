@@ -1,6 +1,5 @@
 import * as z from "zod";
 
-// Form schemas for each step
 export const step1Schema = z
     .object({
         accountType: z.enum(["individual", "business"]),
@@ -67,7 +66,7 @@ export type Step3IndividualData = z.infer<typeof step3IndividualSchema>;
 export type Step3BusinessData = z.infer<typeof step3BusinessSchema>;
 export type Step4Data = z.infer<typeof step4Schema>;
 
-export type FormData = {
+export type FormRegister = {
     step1?: Step1Data;
     step2?: Step2Data;
     step3?: Step3IndividualData | Step3BusinessData;

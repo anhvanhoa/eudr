@@ -14,13 +14,18 @@ const GroupButton = ({ onBack, isHdenNext, isHidenBack, className }: GroupButton
     return (
         <div className={cn("flex justify-between", className)}>
             {!isHidenBack && (
-                <Button className="px-2" type="button" variant="outline" onClick={onBack}>
-                    <ChevronLeft className="w-4 h-4" /> Back
+                <Button
+                    className="px-2 cursor-pointer"
+                    type="button"
+                    variant="outline"
+                    onClick={onBack}
+                >
+                    <ChevronLeft className="w-4 h-4" /> Quay lại
                 </Button>
             )}
             {!isHdenNext && (
-                <Button type="submit" className="px-2">
-                    Next <ChevronRight className="w-4 h-4" />
+                <Button type="submit" className="px-2 cursor-pointer">
+                    Bước tiếp <ChevronRight className="w-4 h-4" />
                 </Button>
             )}
         </div>

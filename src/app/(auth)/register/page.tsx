@@ -9,7 +9,7 @@ import {
     Step3IndividualForm,
     Step3BusinessForm,
     Step4Form,
-    FormData,
+    FormRegister,
     Step1Data,
     Step2Data,
     Step3IndividualData,
@@ -17,10 +17,12 @@ import {
     Step4Data,
 } from "@/components/register";
 import { steps } from "@/components/register/step";
+import { useRegisterMutation } from "@/hooks/useRegisterMutation";
 
 const PageRegister = () => {
     const [currentStep, setCurrentStep] = useState(1);
-    const [formData, setFormData] = useState<FormData>({});
+    const [formData, setFormData] = useState<FormRegister>({});
+    const registerMutation = useRegisterMutation();
 
     const onStep1Submit = (data: Step1Data) => {
         setFormData(prev => ({ ...prev, step1: data }));
@@ -38,10 +40,9 @@ const PageRegister = () => {
     };
 
     const onStep4Submit = (data: Step4Data) => {
-        setFormData(prev => ({ ...prev, step4: data }));
-        // Handle final form submission
-        console.log("Complete form data:", { ...formData, step4: data });
-        alert("Registration completed successfully!");
+        const newFormData = { ...formData, step4: data };
+        setFormData(newFormData);
+        registerMutation.mutate(newFormData);
     };
 
     const goBack = () => {
@@ -58,7 +59,7 @@ const PageRegister = () => {
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-green-100 py-12 px-4">
             <div className="max-w-4xl mx-auto">
                 <h3 className="py-6 text-center mb-6">
-                    <span className="text-3xl font-bold text-gray-800">Register account</span>
+                    <span className="text-3xl font-bold text-gray-800">Đăng ký tài khoản</span>
                 </h3>
                 {/* Progress Steps */}
                 <StepIndicator currentStep={currentStep} />
@@ -67,7 +68,7 @@ const PageRegister = () => {
                 <Card className="shadow-xl">
                     <CardHeader className="text-center">
                         <CardTitle className="text-2xl font-bold text-gray-800">
-                            Step {currentStep}: {getStep(currentStep)?.title}
+                            Bước {currentStep}: {getStep(currentStep)?.title}
                         </CardTitle>
                         <CardDescription>{getStep(currentStep)?.description}</CardDescription>
                     </CardHeader>

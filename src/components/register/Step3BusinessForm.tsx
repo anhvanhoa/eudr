@@ -43,9 +43,9 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
                     name="organizationName"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Organization Name</FormLabel>
+                            <FormLabel>Tên tổ chức</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter organization name" {...field} />
+                                <Input placeholder="Nhập tên tổ chức" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -57,9 +57,9 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
                     name="legalRepresentativeName"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Legal Representative Name</FormLabel>
+                            <FormLabel>Tên người đại diện pháp luật</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter legal representative name" {...field} />
+                                <Input placeholder="Nhập tên người đại diện pháp luật" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -71,9 +71,9 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
                     name="taxCode"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Tax Code</FormLabel>
+                            <FormLabel>Mã số thuế</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter tax code" {...field} />
+                                <Input placeholder="Nhập mã số thuế" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -85,9 +85,9 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
                     name="organizationAddress"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Organization Address</FormLabel>
+                            <FormLabel>Địa chỉ tổ chức</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Enter organization address" {...field} />
+                                <Textarea placeholder="Nhập địa chỉ tổ chức" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -99,9 +99,9 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
                     name="organizationPhone"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Organization Phone Number</FormLabel>
+                            <FormLabel>Số điện thoại tổ chức</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter organization phone number" {...field} />
+                                <Input placeholder="Nhập số điện thoại tổ chức" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -113,13 +113,9 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Email (Optional)</FormLabel>
+                            <FormLabel>Email (Không bắt buộc)</FormLabel>
                             <FormControl>
-                                <Input
-                                    type="email"
-                                    placeholder="Enter organization email"
-                                    {...field}
-                                />
+                                <Input type="email" placeholder="Nhập email tổ chức" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -128,10 +124,10 @@ export const Step3BusinessForm = ({ onSubmit, onBack, initialValues }: Step3Busi
 
                 <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                     <Label className="text-sm font-medium text-yellow-800">
-                        Business Registration Certificate (Optional)
+                        Giấy chứng nhận đăng ký kinh doanh (Không bắt buộc)
                     </Label>
                     <p className="text-sm text-yellow-700 mt-1">
-                        Upload your business registration certificate (PNG, JPG, JPEG, PDF)
+                        Tải lên giấy chứng nhận đăng ký kinh doanh của bạn (PNG, JPG, JPEG, PDF)
                     </p>
                     <Input type="file" accept=".png,.jpg,.jpeg,.pdf" className="mt-2" />
                 </div>

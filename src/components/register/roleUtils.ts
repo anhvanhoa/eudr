@@ -9,60 +9,60 @@ export interface Role {
 
 export const businessRoles: Role[] = [
     {
-        name: "Forest Owner",
+        name: "Chủ rừng",
         icon: Trees,
-        description: "Manage and own forest resources",
+        description: "Quản lý và sở hữu tài nguyên rừng",
         type: "forest_owner",
     },
     {
-        name: "Trader/Harvester",
+        name: "Thương nhân/Khai thác",
         icon: Truck,
-        description: "Harvest and trade timber",
+        description: "Khai thác và buôn bán gỗ",
         type: "trader_harvester",
     },
     {
-        name: "Sawmill/Primary Processor",
+        name: "Xưởng cưa/Sơ chế",
         icon: Factory,
-        description: "Process raw timber",
+        description: "Chế biến gỗ nguyên liệu",
         type: "sawmill_primary_processor",
     },
     {
-        name: "Processing Company",
+        name: "Công ty chế biến",
         icon: Package,
-        description: "Advanced wood processing",
+        description: "Chế biến gỗ nâng cao",
         type: "processing_company",
     },
     {
-        name: "Import Company",
+        name: "Công ty nhập khẩu",
         icon: Ship,
-        description: "Import timber products",
+        description: "Nhập khẩu sản phẩm gỗ",
         type: "import_company",
     },
     {
-        name: "Export Company",
+        name: "Công ty xuất khẩu",
         icon: Plane,
-        description: "Export timber products",
+        description: "Xuất khẩu sản phẩm gỗ",
         type: "export_company",
     },
 ];
 
 export const individualRoles: Role[] = [
     {
-        name: "Forest Owner",
+        name: "Chủ rừng",
         icon: Trees,
-        description: "Manage and own forest resources",
+        description: "Quản lý và sở hữu tài nguyên rừng",
         type: "forest_owner",
     },
     {
-        name: "Trader/Harvester",
+        name: "Thương nhân/Khai thác",
         icon: Truck,
-        description: "Harvest and trade timber",
+        description: "Khai thác và buôn bán gỗ",
         type: "trader_harvester",
     },
     {
-        name: "Sawmill/Primary Processor",
+        name: "Xưởng cưa/Sơ chế",
         icon: Factory,
-        description: "Process raw timber",
+        description: "Chế biến gỗ nguyên liệu",
         type: "sawmill_primary_processor",
     },
 ];

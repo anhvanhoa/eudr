@@ -22,6 +22,7 @@ import { step3IndividualSchema, Step3IndividualData } from "./schemas";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import GroupButton from "./GroupButton";
+import { cn } from "@/lib/utils";
 
 interface Step3IndividualFormProps {
     onSubmit: (data: Step3IndividualData) => void;
@@ -58,10 +59,10 @@ export const Step3IndividualForm = ({
                     name="fullName"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Full Name</FormLabel>
+                            <FormLabel aria-required>Họ và tên</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="Enter full name of forest owner or representative"
+                                    placeholder="Nhập họ và tên chủ rừng hoặc người đại diện"
                                     {...field}
                                 />
                             </FormControl>
@@ -76,16 +77,16 @@ export const Step3IndividualForm = ({
                         name="gender"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Gender</FormLabel>
+                                <FormLabel aria-required>Giới tính</FormLabel>
                                 <FormControl>
                                     <Select onValueChange={field.onChange} value={field.value}>
                                         <SelectTrigger className="w-full">
                                             <SelectValue />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="male">Male</SelectItem>
-                                            <SelectItem value="female">Female</SelectItem>
-                                            <SelectItem value="other">Other</SelectItem>
+                                            <SelectItem value="male">Nam</SelectItem>
+                                            <SelectItem value="female">Nữ</SelectItem>
+                                            <SelectItem value="other">Khác</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </FormControl>
@@ -99,11 +100,11 @@ export const Step3IndividualForm = ({
                         name="age"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Age</FormLabel>
+                                <FormLabel aria-required>Tuổi</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="number"
-                                        placeholder="Enter age"
+                                        placeholder="Nhập tuổi"
                                         {...field}
                                         onChange={e =>
                                             field.onChange(parseInt(e.target.value) || 18)
@@ -121,9 +122,9 @@ export const Step3IndividualForm = ({
                     name="address"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Permanent/Temporary Address</FormLabel>
+                            <FormLabel aria-required>Địa chỉ thường trú/tạm trú</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Enter your address" {...field} />
+                                <Textarea placeholder="Nhập địa chỉ của bạn" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -135,9 +136,9 @@ export const Step3IndividualForm = ({
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Email (Optional)</FormLabel>
+                            <FormLabel>Email (Không bắt buộc)</FormLabel>
                             <FormControl>
-                                <Input type="email" placeholder="Enter your email" {...field} />
+                                <Input type="email" placeholder="Nhập email của bạn" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -149,9 +150,9 @@ export const Step3IndividualForm = ({
                     name="nationalIdNumber"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>National ID Number</FormLabel>
+                            <FormLabel aria-required>Số CCCD/CMND</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter your national ID number" {...field} />
+                                <Input placeholder="Nhập số CCCD/CMND của bạn" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -162,42 +163,45 @@ export const Step3IndividualForm = ({
                     <FormField
                         control={form.control}
                         name="idIssueDate"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>ID Issue Date</FormLabel>
-                                <FormControl>
-                                    <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                                variant="outline"
-                                                className={`w-full justify-start font-normal ${
-                                                    !field.value ? "text-muted-foreground" : ""
-                                                }`}
-                                            >
-                                                {field.value
-                                                    ? new Date(field.value).toLocaleDateString()
-                                                    : "Pick a date"}
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0">
-                                            <Calendar
-                                                mode="single"
-                                                selected={
-                                                    field.value ? new Date(field.value) : undefined
-                                                }
-                                                onSelect={date => {
-                                                    field.onChange(
-                                                        date ? date.toISOString().slice(0, 10) : ""
-                                                    );
-                                                }}
-                                                initialFocus
-                                            />
-                                        </PopoverContent>
-                                    </Popover>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
+                        render={({ field }) => {
+                            const date = new Date(field.value);
+                            const onChangeDate = (date?: Date) => {
+                                field.onChange(date?.toISOString());
+                            };
+
+                            return (
+                                <FormItem>
+                                    <FormLabel aria-required>Ngày cấp</FormLabel>
+                                    <FormControl>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button
+                                                    variant="secondary"
+                                                    className={cn(
+                                                        "w-full justify-start font-normal h-auto py-2.5",
+                                                        {
+                                                            "text-muted-foreground": !field.value,
+                                                        }
+                                                    )}
+                                                >
+                                                    {field.value &&
+                                                        date.toLocaleDateString("vi-VN")}
+                                                    {!field.value && "Chọn ngày"}
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-auto p-0">
+                                                <Calendar
+                                                    mode="single"
+                                                    selected={field.value ? date : undefined}
+                                                    onSelect={onChangeDate}
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            );
+                        }}
                     />
 
                     <FormField
@@ -205,9 +209,9 @@ export const Step3IndividualForm = ({
                         name="idIssuePlace"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>ID Issue Place</FormLabel>
+                                <FormLabel aria-required>Nơi cấp</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter ID issue place" {...field} />
+                                    <Input placeholder="Nhập nơi cấp" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

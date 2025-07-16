@@ -33,7 +33,7 @@ export const Step2Form = ({ onSubmit, onBack, accountType, initialValues }: Step
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel className="text-base font-semibold">
-                                Select Your Role
+                                Vai trò người dùng
                             </FormLabel>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {roles.map(role => {
@@ -59,6 +59,7 @@ export const Step2Form = ({ onSubmit, onBack, accountType, initialValues }: Step
                                                     })}
                                                 >
                                                     <role.icon
+                                                        strokeWidth={1.5}
                                                         className={`w-8 h-8 ${isSelected ? "text-blue-600" : "text-gray-600"}`}
                                                     />
                                                 </div>
@@ -93,8 +94,8 @@ export const Step2Form = ({ onSubmit, onBack, accountType, initialValues }: Step
 
                 <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
                     <h4 className="font-semibold text-blue-800 mb-3">
-                        Available Roles for {accountType === "business" ? "Business" : "Individual"}{" "}
-                        Accounts:
+                        Vai trò có sẵn cho tài khoản{" "}
+                        {accountType === "business" ? "doanh nghiệp" : "cá nhân"}:
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {roles.map(role => {

@@ -1,3 +1,4 @@
+"use no memo";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ import {
 import { User, Building } from "lucide-react";
 import { step1Schema, Step1Data } from "./schemas";
 import GroupButton from "./GroupButton";
+import { cn } from "@/lib/utils";
 
 interface Step1FormProps {
     onSubmit: (data: Step1Data) => void;
@@ -31,9 +33,7 @@ export const Step1Form = ({ onSubmit, initialValues }: Step1FormProps) => {
         resolver: zodResolver(step1Schema),
         defaultValues: initialValues || defaultValues,
     });
-
     const accountType = form.watch("accountType");
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -42,34 +42,50 @@ export const Step1Form = ({ onSubmit, initialValues }: Step1FormProps) => {
                     name="accountType"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel className="text-base font-semibold">Account Type</FormLabel>
+                            <FormLabel className="text-base font-semibold">
+                                Loại tài khoản
+                            </FormLabel>
                             <div className="grid grid-cols-2 gap-4">
                                 <div
-                                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                                        field.value === "individual"
-                                            ? "border-blue-500 bg-blue-50"
-                                            : "border-gray-200 hover:border-gray-300"
-                                    }`}
+                                    className={cn(
+                                        "p-4 border-2 rounded-lg cursor-pointer transition-all",
+                                        {
+                                            "border-blue-500 bg-blue-50":
+                                                field.value === "individual",
+                                            "border-gray-200 hover:border-gray-300":
+                                                field.value !== "individual",
+                                        }
+                                    )}
                                     onClick={() => field.onChange("individual")}
                                 >
-                                    <User className="w-8 h-8 mx-auto mb-2 text-blue-500" />
-                                    <p className="text-center font-medium">Individual</p>
+                                    <User
+                                        strokeWidth={1.5}
+                                        className="w-8 h-8 mx-auto mb-2 text-blue-500"
+                                    />
+                                    <p className="text-center font-medium">Cá nhân</p>
                                     <p className="text-center text-sm text-gray-500">
-                                        Personal account
+                                        Tài khoản cá nhân
                                     </p>
                                 </div>
                                 <div
-                                    className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${
-                                        field.value === "business"
-                                            ? "border-blue-500 bg-blue-50"
-                                            : "border-gray-200 hover:border-gray-300"
-                                    }`}
+                                    className={cn(
+                                        "p-4 border-2 rounded-lg cursor-pointer transition-all",
+                                        {
+                                            "border-blue-500 bg-blue-50":
+                                                field.value === "business",
+                                            "border-gray-200 hover:border-gray-300":
+                                                field.value !== "business",
+                                        }
+                                    )}
                                     onClick={() => field.onChange("business")}
                                 >
-                                    <Building className="w-8 h-8 mx-auto mb-2 text-blue-500" />
-                                    <p className="text-center font-medium">Business</p>
+                                    <Building
+                                        strokeWidth={1.5}
+                                        className="w-8 h-8 mx-auto mb-2 text-blue-500"
+                                    />
+                                    <p className="text-center font-medium">Doanh nghiệp</p>
                                     <p className="text-center text-sm text-gray-500">
-                                        Company account
+                                        Tài khoản doanh nghiệp
                                     </p>
                                 </div>
                             </div>
@@ -84,9 +100,9 @@ export const Step1Form = ({ onSubmit, initialValues }: Step1FormProps) => {
                         name="phoneNumber"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Phone Number</FormLabel>
+                                <FormLabel aria-required>Số điện thoại</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter your phone number" {...field} />
+                                    <Input placeholder="Nhập số điện thoại" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -100,12 +116,9 @@ export const Step1Form = ({ onSubmit, initialValues }: Step1FormProps) => {
                         name="businessRegistrationNumber"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Business Registration Number</FormLabel>
+                                <FormLabel aria-required>Số đăng ký kinh doanh</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        placeholder="Enter business registration number"
-                                        {...field}
-                                    />
+                                    <Input placeholder="Nhập số đăng ký kinh doanh" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -119,13 +132,9 @@ export const Step1Form = ({ onSubmit, initialValues }: Step1FormProps) => {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel aria-required>Mật khẩu</FormLabel>
                                 <FormControl>
-                                    <Input
-                                        type="password"
-                                        placeholder="Create a password"
-                                        {...field}
-                                    />
+                                    <Input type="password" placeholder="Tạo mật khẩu" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -137,11 +146,11 @@ export const Step1Form = ({ onSubmit, initialValues }: Step1FormProps) => {
                         name="confirmPassword"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Confirm Password</FormLabel>
+                                <FormLabel aria-required>Xác nhận mật khẩu</FormLabel>
                                 <FormControl>
                                     <Input
                                         type="password"
-                                        placeholder="Confirm your password"
+                                        placeholder="Nhập lại mật khẩu"
                                         {...field}
                                     />
                                 </FormControl>

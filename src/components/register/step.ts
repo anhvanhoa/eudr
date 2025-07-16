@@ -10,26 +10,26 @@ export interface Step {
 export const steps: Step[] = [
     {
         number: 1,
-        title: "Personal Information",
+        title: "Thông tin cá nhân",
         icon: User,
-        description: "Provide your personal details to create an account.",
+        description: "Cung cấp thông tin cá nhân của bạn để tạo tài khoản.",
     },
     {
         number: 2,
-        title: "User Role",
+        title: "Vai trò người dùng",
         icon: Shield,
-        description: "Select your role to tailor the experience to your needs.",
+        description: "Chọn vai trò của bạn để tùy chỉnh trải nghiệm phù hợp.",
     },
     {
         number: 3,
-        title: "General Information",
+        title: "Thông tin chung",
         icon: FileText,
-        description: "Fill in additional information based on your account type.",
+        description: "Điền thêm thông tin dựa trên loại tài khoản của bạn.",
     },
     {
         number: 4,
-        title: "Completion",
+        title: "Hoàn tất",
         icon: Check,
-        description: "Review your information and complete the registration.",
+        description: "Xem lại thông tin và hoàn tất đăng ký.",
     },
 ];
